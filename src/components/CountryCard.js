@@ -13,6 +13,7 @@ const CountryCard = (props) => {
         backgroundColor: theme === 'dark' ? 'var(--dark-blue)' : 'var(--white)',
         color: theme === 'dark' ? 'var(--white)' : 'var(--very-dark-blue-light-text)',
     };
+
     return (
         <div className={styles['country-card-container']} style={cardStyle}>
             <div>
