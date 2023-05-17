@@ -1,14 +1,19 @@
-import {useContext,useState} from "react";
-const Header = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+import {useContext, useEffect, useState} from 'react';
+//context
+import {ThemeContext} from "../contexts/ThemeContext";
+//styles
+import styles from '../styles/Header.module.css';
 
-    const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode);
-    };
+const Header = () => {
+    const { toggleTheme } = useContext(ThemeContext);
+
     return (
-        <header>
-            {/* Header content */}
-            <button>
+        <header className={`${styles.header}`}>
+            <span style={{fontWeight: '800'}}>
+                Where in the world?
+            </span>
+            <button onClick={toggleTheme}>
+                jo;;j
             </button>
         </header>
     );
