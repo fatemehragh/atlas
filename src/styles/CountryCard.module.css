@@ -1,7 +1,21 @@
 @import './variables.css';
 
 .country-card-container {
-    border: 5px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 35px 40px;
+    width: 250px;
+    overflow: hidden;
+    flex-basis: initial;
+}
+.country-card-container >div:nth-child(1) {
+
+}
+.country-card-container >div:nth-child(1) >img {
+    width: 100%;
+}
+.country-card-container >div:nth-child(2) {
+    padding: 16px;
 }
 .country-card-container >div >div>span:nth-child(1){
     font-weight: 600;

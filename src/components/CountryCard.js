@@ -16,15 +16,15 @@ const CountryCard = (props) => {
     return (
         <div className={styles['country-card-container']} style={cardStyle}>
             <div>
-                <img width={200} src={country.flags['svg']} alt={country.flags['alt']}/>
+                <img src={country.flags['svg']} alt={country.flags['alt']}/>
             </div>
             <div>
                 <div className={styles['country-card-name']}>
                     {country.name.common}
                 </div>
-                <div><span>Population:</span> <span>{country['population'].toLocaleString()}</span></div>
-                <div><span>Region:</span><span>{country['region']}</span></div>
-                <div><span>capital:</span> <span>{country['capital']}</span></div>
+                <div><span>Population: </span> <span>{country['population'].toLocaleString()}</span></div>
+                <div><span>Region: </span><span>{country['region']}</span></div>
+                <div><span>capital: </span> <span>{country['capital']}</span></div>
             </div>
 
         </div>

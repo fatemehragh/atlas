@@ -3,6 +3,10 @@ import React, { useEffect, useState } from 'react';
 import fetchCountriesData from '../api/countries';
 //components
 import CountryCard from "./CountryCard";
+//styles
+import styles from '../styles/Home.module.css';
+
+
 
 const HomePage = () => {
     const [countriesData, setCountriesData] = useState(null);
@@ -17,11 +21,11 @@ const HomePage = () => {
     }, []);
 
     return (
-     <>
+     <div className={styles['country-home']}>
          {countriesData && countriesData.map((country) => (
              <CountryCard country={country} />
          ))}
-     </>
+     </div>
   )
 }
 
