@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-//API
+// API
 import fetchCountriesData from '../api/countries';
-//components
+// components
 import CountryCard from "./CountryCard";
-//utils
+// utils
 import {fuzzySearch} from "../utils/Search";
-//styles
+// constants
+import {regions} from "../constants/constants";
+// styles
 import styles from '../styles/Home.module.css';
 
 
@@ -14,6 +16,7 @@ const HomePage = () => {
     const [countriesData, setCountriesData] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedRegion, setSelectedRegion] = useState('');
+    const [sortBy, setSortBy] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,8 +44,23 @@ const HomePage = () => {
         });
     };
 
+    const sortCountries = (countries, sortBy) => {
+        if (sortBy === 'population') {
+            return countries.sort((a, b) => b.population - a.population);
+        } else if (sortBy === 'name') {
+            return countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
+        } else {
+            return countries;
+        }
+    };
+
+    const handleSort = (event) => {
+        setSortBy(event.target.value);
+    };
+
+
     const filteredCountries = filterCountries(countriesData, searchTerm, selectedRegion);
-    const regions = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
+    const sortedCountries = sortCountries(filteredCountries, sortBy);
 
     return (
      <div className={styles['country-home']}>
@@ -59,8 +77,13 @@ const HomePage = () => {
                      <option key={region} value={region.toLowerCase()}>{region}</option>
                  ))}
              </select>
+             <select value={sortBy} onChange={handleSort}>
+                 <option value="">Sort by</option>
+                 <option value="population">Population</option>
+                 <option value="name">Name</option>
+             </select>
          </div>
-         {filteredCountries && filteredCountries.map((country) => (
+         {sortedCountries && sortedCountries.map((country) => (
              <CountryCard country={country} />
          ))}
      </div>
