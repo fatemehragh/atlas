@@ -1,19 +1,33 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useContext} from 'react';
+//context
+import {ThemeContext} from "../contexts/ThemeContext";
+//styles
+import styles from '../styles/CountryCard.module.css';
+import '../styles/variables.css';
 
 const CountryCard = (props) => {
     const country = props.country;
-    const countryPageUrl = `/countries/${country.name.common}`;
+    const { theme } = useContext(ThemeContext);
 
+    const cardStyle = {
+        backgroundColor: theme === 'dark' ? 'var(--dark-blue)' : 'var(--white)',
+        color: theme === 'dark' ? 'var(--white)' : 'var(--very-dark-blue-light-text)',
+    };
     return (
-        <Link to={countryPageUrl}>
+        <div className={styles['country-card-container']} style={cardStyle}>
             <div>
-                {country.name.common}
-                Population: {country['population']}
-                Region: {country['region']}
-                capital: {country['capital']}
+                <img width={200} src={country.flags['svg']} alt={country.flags['alt']}/>
             </div>
-        </Link>
+            <div>
+                <div className={styles['country-card-name']}>
+                    {country.name.common}
+                </div>
+                <div><span>Population:</span> <span>{country['population'].toLocaleString()}</span></div>
+                <div><span>Region:</span><span>{country['region']}</span></div>
+                <div><span>capital:</span> <span>{country['capital']}</span></div>
+            </div>
+
+        </div>
     )
 }
 export default CountryCard
